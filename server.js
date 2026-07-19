@@ -1,11 +1,16 @@
 const express = require("express");
+const path = require("path");
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 // CRITICAL LINE
 app.use(express.json());
 
-app.use(express.static("public"));
+app.use(express.static(path.join(__dirname, "public")));
+
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "index.html"));
+});
 
 const officeLat = 7.466233089765386;
 const officeLng = 80.61632719551174;
